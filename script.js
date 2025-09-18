@@ -10,45 +10,64 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Hamburger Menu Toggle
 const hamburger = document.querySelector('.hamburger');
-const navLinks = document.querySelector('.nav-links');
+const mobileMenu = document.querySelector('.mobile-menu');
 
 hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('active');
-    navLinks.classList.toggle('active');
+    mobileMenu.classList.toggle('active');
+    
+    // Prevent body scroll when menu is open
+    if (mobileMenu.classList.contains('active')) {
+        document.body.style.overflow = 'hidden';
+    } else {
+        document.body.style.overflow = 'auto';
+    }
 });
 
 // Close mobile menu when clicking on a link
-document.querySelectorAll('.nav-links a').forEach(link => {
+document.querySelectorAll('.mobile-nav-links a').forEach(link => {
     link.addEventListener('click', () => {
         hamburger.classList.remove('active');
-        navLinks.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = 'auto';
     });
 });
 
 // Theme Toggle
 const themeToggle = document.getElementById('themeToggle');
+const mobileThemeToggle = document.getElementById('mobileThemeToggle');
 const themeIcon = themeToggle.querySelector('i');
+const mobileThemeIcon = mobileThemeToggle.querySelector('i');
 
 // Check for saved theme preference
 if (localStorage.getItem('theme') === 'dark') {
     document.body.classList.add('dark-mode');
     themeIcon.classList.remove('fa-moon');
     themeIcon.classList.add('fa-sun');
+    mobileThemeIcon.classList.remove('fa-moon');
+    mobileThemeIcon.classList.add('fa-sun');
 }
 
-themeToggle.addEventListener('click', () => {
+function toggleTheme() {
     document.body.classList.toggle('dark-mode');
     
     if (document.body.classList.contains('dark-mode')) {
         themeIcon.classList.remove('fa-moon');
         themeIcon.classList.add('fa-sun');
+        mobileThemeIcon.classList.remove('fa-moon');
+        mobileThemeIcon.classList.add('fa-sun');
         localStorage.setItem('theme', 'dark');
     } else {
         themeIcon.classList.remove('fa-sun');
         themeIcon.classList.add('fa-moon');
+        mobileThemeIcon.classList.remove('fa-sun');
+        mobileThemeIcon.classList.add('fa-moon');
         localStorage.setItem('theme', 'light');
     }
-});
+}
+
+themeToggle.addEventListener('click', toggleTheme);
+mobileThemeToggle.addEventListener('click', toggleTheme);
 
 // Main Carousel Auto-Sliding
 let currentSlide = 0;
@@ -114,23 +133,17 @@ if (contactForm) {
     });
 }
 
-// View All button functionality
-const viewAllBtn = document.querySelector('.view-all');
-if (viewAllBtn) {
-    viewAllBtn.addEventListener('click', () => {
-        alert('View All products feature would show all available products.');
-    });
-}
-
-// Carousel button functionality
-const carouselButtons = document.querySelectorAll('.carousel-btn');
-carouselButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        alert('Special offer! Get 15% off on all gaming laptops this week!');
-    });
-});
 
 // Refresh AOS when window is resized
 window.addEventListener('resize', function() {
     AOS.refresh();
 });
+
+// Fix for mobile viewport height issue
+function setVH() {
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+
+setVH();
+window.addEventListener('resize', setVH);
