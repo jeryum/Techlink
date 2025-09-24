@@ -1,4 +1,6 @@
 // Initialize AOS
+
+
 document.addEventListener('DOMContentLoaded', function() {
     AOS.init({
         duration: 800,
@@ -6,6 +8,18 @@ document.addEventListener('DOMContentLoaded', function() {
         once: true,
         mirror: false
     });
+});
+
+document.querySelectorAll('.carousel-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    window.location.href = 'main/lessons.html';
+  });
+});
+
+document.querySelectorAll('.carousel-btn2').forEach(btn => {
+  btn.addEventListener('click', () => {
+    window.location.href = 'main/games.html';
+  });
 });
 
 // Hamburger Menu Toggle
