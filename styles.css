@@ -230,6 +230,7 @@ nav {
     color: white;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
     max-width: 50%;
+    
 }
 
 .carousel-content h2 {
@@ -272,6 +273,22 @@ nav {
     left: 100%;
 }
 
+.carousel-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease;
+    z-index: 1; /* Ensure proper stacking */
+}
+
+.carousel-slide.active {
+    opacity: 1;
+    z-index: 2; /* Active slide should be on top */
+}
+
 .carousel-btn:hover {
     transform: translateY(-3px);
     box-shadow: 0 6px 20px rgba(255, 76, 141, 0.6);
@@ -281,7 +298,7 @@ nav {
     transform: translateY(1px);
 }
 
-.carousel-btn2 {
+.aa {
     background: linear-gradient(90deg, #49B6FC, #065792);
     color: white;
     border: none;
@@ -294,11 +311,13 @@ nav {
     box-shadow: 0 4px 15px rgba(255, 76, 141, 0.4);
     position: relative;
     overflow: hidden;
+   left:3rem;
 }
 
-.carousel-btn2::before {
+
+.aa::before {
     content: '';
-    position: absolute;
+    position: relative;
     top: 0;
     left: -100%;
     width: 100%;
@@ -307,16 +326,16 @@ nav {
     transition: all 0.6s ease;
 }
 
-.carousel-btn2:hover::before {
+.aa:hover::before {
     left: 100%;
 }
 
-.carousel-btn2:hover {
+.aa:hover {
     transform: translateY(-3px);
     box-shadow: 0 6px 20px rgba(255, 76, 141, 0.6);
 }
 
-.carousel-btn2:active {
+.aa:active {
     transform: translateY(1px);
 }
 
@@ -429,6 +448,7 @@ nav {
     margin: 0 0.5rem;
     cursor: pointer;
     transition: all 0.3s ease;
+    
 }
 
 .carousel-nav-btn:hover {

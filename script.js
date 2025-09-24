@@ -1,6 +1,4 @@
 // Initialize AOS
-
-
 document.addEventListener('DOMContentLoaded', function() {
     AOS.init({
         duration: 800,
@@ -8,19 +6,65 @@ document.addEventListener('DOMContentLoaded', function() {
         once: true,
         mirror: false
     });
+    
+    // Initialize carousel after DOM is loaded
+    initCarousel();
 });
 
-document.querySelectorAll('.carousel-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    window.location.href = 'main/lessons.html';
-  });
+// Add button click handlers for carousel
+document.addEventListener('DOMContentLoaded', function() {
+    // Add click handlers for carousel buttons
+    const lessonsBtn = document.getElementById('lessonsBtn');
+    const gamesBtn = document.getElementById('gamesBtn');
+    
+    if (lessonsBtn) {
+        lessonsBtn.addEventListener('click', function() {
+            window.location.href = 'main/lessons.html';
+        });
+    }
+    
+    if (gamesBtn) {
+        gamesBtn.addEventListener('click', function() {
+            window.location.href = 'main/games.html';
+        });
+    }
 });
-
-document.querySelectorAll('.carousel-btn2').forEach(btn => {
-  btn.addEventListener('click', () => {
-    window.location.href = 'main/games.html';
-  });
-});
+// Main Carousel Functionality
+function initCarousel() {
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.carousel-slide');
+    const totalSlides = slides.length;
+    
+    // Ensure only the first slide is active initially
+    slides.forEach((slide, index) => {
+        if (index === 0) {
+            slide.classList.add('active');
+        } else {
+            slide.classList.remove('active');
+        }
+    });
+    
+    function showSlide(n) {
+        // Remove active class from all slides
+        slides.forEach(slide => slide.classList.remove('active'));
+        
+        // Update current slide index
+        currentSlide = (n + totalSlides) % totalSlides;
+        
+        // Add active class to the current slide
+        slides[currentSlide].classList.add('active');
+        
+        // Refresh AOS for new slide animations
+        AOS.refresh();
+    }
+    
+    function nextSlide() {
+        showSlide(currentSlide + 1);
+    }
+    
+    // Auto advance slides every 5 seconds
+    setInterval(nextSlide, 5000);
+}
 
 // Hamburger Menu Toggle
 const hamburger = document.querySelector('.hamburger');
@@ -83,59 +127,41 @@ function toggleTheme() {
 themeToggle.addEventListener('click', toggleTheme);
 mobileThemeToggle.addEventListener('click', toggleTheme);
 
-// Main Carousel Auto-Sliding
-let currentSlide = 0;
-const slides = document.querySelectorAll('.carousel-slide');
-
-function showSlide(n) {
-    slides.forEach(slide => slide.classList.remove('active'));
-    currentSlide = (n + slides.length) % slides.length;
-    slides[currentSlide].classList.add('active');
-    
-    // Add AOS animation to the newly active slide
-    AOS.refresh();
-}
-
-function nextSlide() {
-    showSlide(currentSlide + 1);
-}
-
-// Auto advance slides every 5 seconds
-setInterval(nextSlide, 5000);
-
 // Products Carousel Manual Control
 const productsContainer = document.querySelector('.products-container');
 const prevBtn = document.getElementById('prevBtn');
 const nextBtn = document.getElementById('nextBtn');
 const productCards = document.querySelectorAll('.product-card');
-const cardWidth = productCards[0].offsetWidth + 32; // width + margin
 
-let scrollPosition = 0;
-const maxScroll = productsContainer.scrollWidth - productsContainer.clientWidth;
+if (productCards.length > 0) {
+    const cardWidth = productCards[0].offsetWidth + 32; // width + margin
+    let scrollPosition = 0;
+    const maxScroll = productsContainer.scrollWidth - productsContainer.clientWidth;
 
-nextBtn.addEventListener('click', () => {
-    if (scrollPosition < maxScroll) {
-        scrollPosition += cardWidth;
-        // Ensure we don't scroll past the end
-        scrollPosition = Math.min(scrollPosition, maxScroll);
-        productsContainer.scrollTo({
-            left: scrollPosition,
-            behavior: 'smooth'
-        });
-    }
-});
+    nextBtn.addEventListener('click', () => {
+        if (scrollPosition < maxScroll) {
+            scrollPosition += cardWidth;
+            // Ensure we don't scroll past the end
+            scrollPosition = Math.min(scrollPosition, maxScroll);
+            productsContainer.scrollTo({
+                left: scrollPosition,
+                behavior: 'smooth'
+            });
+        }
+    });
 
-prevBtn.addEventListener('click', () => {
-    if (scrollPosition > 0) {
-        scrollPosition -= cardWidth;
-        // Ensure we don't scroll before the start
-        scrollPosition = Math.max(scrollPosition, 0);
-        productsContainer.scrollTo({
-            left: scrollPosition,
-            behavior: 'smooth'
-        });
-    }
-});
+    prevBtn.addEventListener('click', () => {
+        if (scrollPosition > 0) {
+            scrollPosition -= cardWidth;
+            // Ensure we don't scroll before the start
+            scrollPosition = Math.max(scrollPosition, 0);
+            productsContainer.scrollTo({
+                left: scrollPosition,
+                behavior: 'smooth'
+            });
+        }
+    });
+}
 
 // Contact form submission
 const contactForm = document.getElementById('contactForm');
@@ -146,7 +172,6 @@ if (contactForm) {
         contactForm.reset();
     });
 }
-
 
 // Refresh AOS when window is resized
 window.addEventListener('resize', function() {
