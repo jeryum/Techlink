@@ -11,6 +11,39 @@ document.addEventListener('DOMContentLoaded', function() {
     initCarousel();
 });
 
+// typing
+
+const elements = [
+  { id: "title", text: "About Us" },
+  { id: "para1", text: "TechLink is dedicated to enhancing digital literacy among first-year BSIT students through a structured learning program. We provide updated technology and resources to help students excel in their studies and prepare for future careers." },
+  { id: "para2", text: "Our team thoughtfully selects and tests each tool to ensure it meets high standards of performance, reliability, and value. We are passionate about technology and committed to helping learners maximize the potential of their devices." },
+  { id: "para3", text: "Through continuous innovation and support, TechLink strives to empower students with the skills needed to succeed in today’s digital world." }
+];
+
+function typeEffect(element, text, speed, callback) {
+  let i = 0;
+  element.innerHTML = "";
+  const timer = setInterval(() => {
+    element.innerHTML += text.charAt(i);
+    i++;
+    if (i >= text.length) {
+      clearInterval(timer);
+      if (callback) callback();
+    }
+  }, speed);
+}
+
+// Function to type all elements sequentially
+function typeAll(elements, speed, index = 0) {
+  if (index < elements.length) {
+    const el = document.getElementById(elements[index].id);
+    typeEffect(el, elements[index].text, speed, () => typeAll(elements, speed, index + 1));
+  }
+}
+
+// Start typing with desired speed
+typeAll(elements, 15);
+
 // Add button click handlers for carousel
 document.addEventListener('DOMContentLoaded', function() {
     // Add click handlers for carousel buttons
