@@ -52,13 +52,13 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (lessonsBtn) {
         lessonsBtn.addEventListener('click', function() {
-            window.location.href = 'main/lessons.html';
+            window.location.href = 'lessons.html';
         });
     }
     
     if (gamesBtn) {
         gamesBtn.addEventListener('click', function() {
-            window.location.href = 'main/games.html';
+            window.location.href = 'games.html';
         });
     }
 });
