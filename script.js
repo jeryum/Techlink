@@ -42,7 +42,7 @@ function typeAll(elements, speed, index = 0) {
 }
 
 // Start typing with desired speed
-typeAll(elements, 15);
+typeAll(elements, 20);
 
 // Add button click handlers for carousel
 document.addEventListener('DOMContentLoaded', function() {
