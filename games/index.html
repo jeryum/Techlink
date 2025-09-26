@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechLink - Games</title>
+  <link rel="stylesheet" href="ztyles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav>
+    <div class="logo" data-aos="fade-right" data-aos-duration="800">
+      <img src="https://i.ibb.co/F45Rntd3/file-00000000edfc61fa892d60997c7437bd.png" alt="TechLink Logo" class="logo-img">
+      TechLink
+    </div>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="https://techlink-ssp.vercel.app" data-aos="fade-down" data-aos-delay="100">Home</a></li>
+        <li><a href="lessons.html" data-aos="fade-down" data-aos-delay="200">Lessons</a></li>
+  
+      </ul>
+      <button class="theme-toggle" id="themeToggle" data-aos="fade-down" data-aos-delay="500">
+        <i class="fas fa-moon"></i>
+      </button>
+      <div class="hamburger" data-aos="fade-down" data-aos-delay="500">
+        <div></div><div></div><div></div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu">
+    <div class="mobile-menu-header">
+      <img src="https://i.ibb.co/F45Rntd3/file-00000000edfc61fa892d60997c7437bd.png" alt="TechLink Logo" class="mobile-logo">
+      <h3>TechLink</h3>
+    </div>
+    <ul class="mobile-nav-links">
+      <li><a href="https://techlink-ssp.vercel.app">Home</a></li>
+      <li><a href="lessons.html">Lessons</a></li>
+      
+      <button class="mobile-theme-toggle" id="mobileThemeToggle">
+        <i class="fas fa-moon"></i> Toggle Theme
+      </button>
+    </ul>
+  </div>
+
+  <!-- Game 1: Keyboard Ninja -->
+  <section id="game1">
+    <div class="section-header" data-aos="fade-up">
+      <h2 class="section-title">Keyboard Ninja</h2>
+    </div>
+    <div style="text-align:center;"id="game-box1" class="scroll-container" data-aos="fade-up" data-aos-delay="200">
+      <p id="command1">Press start to begin!</p>
+      <p id="timer1"></p>
+      <p id="score1">Score: 0</p>
+      <button id="startBtn1">Start Game</button>
+    </div>
+  </section>
+
+  <!-- Game 2: Shortcut Master -->
+  <section id="game2">
+    <div class="section-header" data-aos="fade-up">
+      <h2 class="section-title">Shortcut Master</h2>
+    </div>
+    <div id="game-box2" style="text-align:center"class="scroll-container" data-aos="fade-up" data-aos-delay="200">
+      <p id="command2">Press start to begin!</p>
+      <p id="timer2"></p>
+      <p id="score2">Score: 0</p>
+      <button id="startBtn2">Start Game</button>
+    </div>
+  </section>
+
+  <!-- Game 3: Digital Detective -->
+  <section id="game3">
+    <div class="section-header" data-aos="fade-up">
+      <h2 class="section-title">Digital Detective</h2>
+    </div>
+    <div id="game-box3" class="scroll-container" data-aos="fade-up" data-aos-delay="200">
+      <p id="question"></p>
+      <div id="choices"></div>
+      <p id="score3">Score: 0</p>
+      <button id="nextBtn" style="display:none;">Next</button>
+    </div>
+  </section>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="zcript.js"></script>
+  
+</body>
+</html>
