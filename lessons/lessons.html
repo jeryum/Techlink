@@ -1,87 +1,511 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Digital Literacy Lessons – TechLink</title>
-<style>
-  body {font-family: Arial, sans-serif; background:#f5f7fa; margin:0; line-height:1.6;}
-  header {background:#2c3e50; color:#fff; padding:20px; text-align:center;}
-  main   {max-width:900px; margin:20px auto; padding:20px; background:#fff; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.1);}
-  h2     {color:#2c3e50; margin-top:1.5em;}
-  ul, ol {margin-left:20px;}
-  .tip   {background:#ecf0f1; padding:10px 15px; border-left:5px solid #3498db; margin:10px 0; border-radius:6px;}
-  footer {text-align:center; padding:15px; font-size:0.9em; color:#7f8c8d;}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Literacy Lessons – TechLink</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    /* Reset and Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    :root {
+      --primary-color: #065792;
+      --secondary-color: #49B6FC;
+      --text-color: #333;
+      --bg-color: #f5f7fa;
+      --card-bg: #ffffff;
+      --nav-width: 250px;
+    }
+
+    .dark-mode {
+      --text-color: #f9f9f9;
+      --bg-color: #121212;
+      --card-bg: #1e1e1e;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      transition: all 0.3s ease;
+      line-height: 1.6;
+    }
+
+    /* Navigation */
+    nav {
+      background-color: var(--primary-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      width: 100%;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: white;
+      display: flex;
+      align-items: center;
+    }
+
+    .logo-img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+      object-fit: cover;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+    }
+
+    .nav-links li {
+      margin-left: 2rem;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #ffeb3b;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      margin-left: 1rem;
+    }
+
+    .hamburger div {
+      width: 25px;
+      height: 3px;
+      background-color: white;
+      margin: 3px 0;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      margin-left: 1rem;
+    }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 80%;
+      max-width: 300px;
+      height: 100%;
+      background-color: var(--primary-color);
+      z-index: 1000;
+      transition: right 0.5s ease;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .mobile-menu.active {
+      right: 0;
+    }
+
+    .mobile-menu-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .mobile-logo {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 1rem;
+      border: 3px solid white;
+    }
+
+    .mobile-menu-header h3 {
+      color: white;
+      font-size: 1.5rem;
+    }
+
+    .mobile-nav-links {
+      list-style: none;
+      flex-grow: 1;
+    }
+
+    .mobile-nav-links li {
+      margin-bottom: 1.5rem;
+    }
+
+    .mobile-nav-links a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.2rem;
+      display: block;
+      padding: 0.5rem 0;
+      transition: all 0.3s ease;
+    }
+
+    .mobile-nav-links a:hover {
+      color: #ffeb3b;
+      padding-left: 10px;
+    }
+
+    .mobile-theme-toggle {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: none;
+      padding: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: auto;
+    }
+
+    .mobile-theme-toggle:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .mobile-theme-toggle i {
+      margin-right: 10px;
+    }
+
+    /* Main Content */
+    main {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 20px;
+      background: var(--card-bg);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+
+    header {
+      background: #2c3e50;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      color: white;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      color: var(--primary-color);
+      margin-top: 1.5em;
+      padding-bottom: 0.5em;
+      border-bottom: 2px solid var(--secondary-color);
+    }
+
+    ul, ol {
+      margin-left: 20px;
+      margin-bottom: 1em;
+    }
+
+    .tip {
+      background: #ecf0f1;
+      padding: 10px 15px;
+      border-left: 5px solid #3498db;
+      margin: 10px 0;
+      border-radius: 6px;
+    }
+
+    .dark-mode .tip {
+      background: #2c3e50;
+      color: #f9f9f9;
+    }
+
+    section {
+      margin-bottom: 2em;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #333;
+      color: white;
+      padding: 2rem;
+      width: 100%;
+      margin-top: 40px;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+      width: 100%;
+    }
+
+    .social-icons {
+      margin-bottom: 1rem;
+    }
+
+    .social-icons a {
+      color: white;
+      font-size: 1.5rem;
+      margin: 0 0.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      color: var(--secondary-color);
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+    .footer-links a {
+      color: white;
+      margin: 0 1rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--secondary-color);
+    }
+
+    .copyright {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    /* Responsive Design */
+    @media screen and (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      
+      .hamburger {
+        display: flex;
+      }
+      
+      main {
+        margin: 10px;
+        padding: 15px;
+      }
+      
+      .footer-links {
+        flex-direction: column;
+      }
+      
+      .footer-links a {
+        margin: 0.5rem 0;
+      }
+    }
+
+    /* AOS Custom Animations */
+    [data-aos][data-aos][data-aos-duration="400"], body[data-aos-duration="400"] [data-aos] {
+      transition-duration: 400ms;
+    }
+
+    [data-aos][data-aos][data-aos-delay="400"], body[data-aos-delay="400"] [data-aos] {
+      transition-delay: 0;
+    }
+
+    [data-aos][data-aos][data-aos-delay="400"].aos-animate, body[data-aos-delay="400"] [data-aos].aos-animate {
+      transition-delay: 400ms;
+    }
+  </style>
 </head>
 <body>
+  <!-- Navigation Bar -->
+  <nav>
+    <div class="logo" data-aos="fade-right" data-aos-duration="800">
+      <img src="https://i.ibb.co/F45Rntd3/file-00000000edfc61fa892d60997c7437bd.png" alt="TechLink Logo" class="logo-img">
+      TechLink
+    </div>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="https://techlink-ssp.vercel.app" data-aos="fade-down" data-aos-delay="100">Home</a></li>
+        <li><a href="https://techlink-ssp.vercel.app/lessons/" data-aos="fade-down" data-aos-delay="200">Lessons</a></li>
+      </ul>
+      <button class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+      </button>
+      <div class="hamburger">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  </nav>
 
-<header>
-  <h1>TechLink Digital Literacy Lessons</h1>
-  <p>For First-Year BSIT Students – Dalubhasaang Politekniko ng Lungsod ng Baliwag</p>
-</header>
-
-<main>
-
-  <!-- Google Classroom -->
-  <section>
-    <h2>1. Google Classroom Basics</h2>
-    <p>Google Classroom is a free learning platform for managing coursework and communicating with instructors. Here’s how to get started:</p>
-    <ol>
-      <li><strong>Join a Class</strong> – Click the <em>“+”</em> icon, select <em>Join class</em>, and enter the code from your instructor.</li>
-      <li><strong>Check the Stream</strong> – The Stream tab shows announcements, upcoming deadlines, and discussions.</li>
-      <li><strong>Classwork Tab</strong> – View assignments, quizzes, and materials. Use <em>View your work</em> to track submissions.</li>
-      <li><strong>Submit Work</strong> – Open an assignment, attach a file or create a Google Doc/Slide directly, then click <em>Turn In</em>.</li>
-      <li><strong>Private Comments</strong> – Ask the teacher questions privately under each assignment for clarification.</li>
-    </ol>
-    <div class="tip">Tip: Install the Google Classroom mobile app for push notifications and quick submissions.</div>
-  </section>
-
-  <!-- Google Workspace -->
-  <section>
-    <h2>2. Google Workspace Tools</h2>
-    <p>Google Workspace is a suite of productivity apps you already have with your school Gmail account. Core tools include:</p>
-    <ul>
-      <li><strong>Google Drive</strong> – Cloud storage for files and folders. Organize by subject and enable sharing permissions carefully.</li>
-      <li><strong>Docs</strong> – Word processor with real-time collaboration and version history.</li>
-      <li><strong>Slides</strong> – Presentation tool with templates and embedded media support.</li>
-      <li><strong>Sheets</strong> – Spreadsheet for data analysis, formulas, and charts.</li>
-      <li><strong>Forms</strong> – Create surveys or quizzes and automatically collect responses in Sheets.</li>
-      <li><strong>Meet</strong> – Video conferencing integrated with Calendar and Classroom.</li>
+  <!-- Mobile Menu -->
+  <div class="mobile-menu">
+    <div class="mobile-menu-header">
+      <img src="https://i.ibb.co/F45Rntd3/file-00000000edfc61fa892d60997c7437bd.png" alt="TechLink Logo" class="mobile-logo">
+      <h3>TechLink</h3>
+    </div>
+    <ul class="mobile-nav-links">
+      <li><a href="https://techlink-ssp.vercel.app">Home</a></li>
+      <li><a href="https://techlink-ssp.vercel.app/lessons/">Lessons</a></li>
     </ul>
-    <div class="tip">Practice: Create a shared class folder in Drive and set view-only permissions for classmates.</div>
-  </section>
+    <button class="mobile-theme-toggle" id="mobileThemeToggle">
+      <i class="fas fa-moon"></i> Toggle Theme
+    </button>
+  </div>
 
-  <!-- Digital Literacy Fundamentals -->
-  <section>
-    <h2>3. Core Digital Literacy Skills</h2>
-    <p>Being digitally literate means using technology safely, efficiently, and responsibly.</p>
-    <ul>
-      <li><strong>Cybersecurity Awareness</strong> – Use strong, unique passwords and enable two-factor authentication. Recognize phishing emails and suspicious links.</li>
-      <li><strong>Information Evaluation</strong> – Check the source, author, and date before trusting online content. Compare multiple references.</li>
-      <li><strong>Online Etiquette</strong> – Communicate respectfully in emails, chats, and forums. Avoid ALL CAPS unless necessary.</li>
-      <li><strong>Data Privacy</strong> – Control who can view your files, keep personal info private, and understand privacy settings on social platforms.</li>
-      <li><strong>File Management</strong> – Create clear folder structures (e.g., “1stSem/Programming”) and back up important files regularly.</li>
-    </ul>
-    <div class="tip">Remember: What you share online can remain visible for years—think before you post.</div>
-  </section>
+  <!-- Main Content -->
+  <header>
+    <h1>TechLink Digital Literacy Lessons</h1>
+    <p>For First-Year BSIT Students – Dalubhasaang Politekniko ng Lungsod ng Baliwag</p>
+  </header>
 
-  <!-- Suggested Practice Activities -->
-  <section>
-    <h2>4. Practice Activities</h2>
-    <ol>
-      <li>Join your class’s Google Classroom and post an introduction on the Stream.</li>
-      <li>Create a Google Drive folder structure for all your subjects and share a screenshot with your instructor.</li>
-      <li>Draft a one-page research summary in Google Docs and use the <em>Comments</em> feature with a classmate for feedback.</li>
-      <li>Schedule a mock video meeting in Google Meet and invite a friend using Calendar.</li>
-    </ol>
-  </section>
+  <main>
+    <!-- Google Classroom -->
+    <section data-aos="fade-up">
+      <h2>1. Google Classroom Basics</h2>
+      <p>Google Classroom is a free learning platform for managing coursework and communicating with instructors. Here's how to get started:</p>
+      <ol>
+        <li><strong>Join a Class</strong> – Click the <em>"+"</em> icon, select <em>Join class</em>, and enter the code from your instructor.</li>
+        <li><strong>Check the Stream</strong> – The Stream tab shows announcements, upcoming deadlines, and discussions.</li>
+        <li><strong>Classwork Tab</strong> – View assignments, quizzes, and materials. Use <em>View your work</em> to track submissions.</li>
+        <li><strong>Submit Work</strong> – Open an assignment, attach a file or create a Google Doc/Slide directly, then click <em>Turn In</em>.</li>
+        <li><strong>Private Comments</strong> – Ask the teacher questions privately under each assignment for clarification.</li>
+      </ol>
+      <div class="tip">Tip: Install the Google Classroom mobile app for push notifications and quick submissions.</div>
+    </section>
 
-</main>
+    <!-- Google Workspace -->
+    <section data-aos="fade-up" data-aos-delay="100">
+      <h2>2. Google Workspace Tools</h2>
+      <p>Google Workspace is a suite of productivity apps you already have with your school Gmail account. Core tools include:</p>
+      <ul>
+        <li><strong>Google Drive</strong> – Cloud storage for files and folders. Organize by subject and enable sharing permissions carefully.</li>
+        <li><strong>Docs</strong> – Word processor with real-time collaboration and version history.</li>
+        <li><strong>Slides</strong> – Presentation tool with templates and embedded media support.</li>
+        <li><strong>Sheets</strong> – Spreadsheet for data analysis, formulas, and charts.</li>
+        <li><strong>Forms</strong> – Create surveys or quizzes and automatically collect responses in Sheets.</li>
+        <li><strong>Meet</strong> – Video conferencing integrated with Calendar and Classroom.</li>
+      </ul>
+      <div class="tip">Practice: Create a shared class folder in Drive and set view-only permissions for classmates.</div>
+    </section>
 
-<footer>
-  &copy; 2025 TechLink Digital Literacy Program – Baliwag Polytechnic College
-</footer>
+    <!-- Digital Literacy Fundamentals -->
+    <section data-aos="fade-up" data-aos-delay="200">
+      <h2>3. Core Digital Literacy Skills</h2>
+      <p>Being digitally literate means using technology safely, efficiently, and responsibly.</p>
+      <ul>
+        <li><strong>Cybersecurity Awareness</strong> – Use strong, unique passwords and enable two-factor authentication. Recognize phishing emails and suspicious links.</li>
+        <li><strong>Information Evaluation</strong> – Check the source, author, and date before trusting online content. Compare multiple references.</li>
+        <li><strong>Online Etiquette</strong> – Communicate respectfully in emails, chats, and forums. Avoid ALL CAPS unless necessary.</li>
+        <li><strong>Data Privacy</strong> – Control who can view your files, keep personal info private, and understand privacy settings on social platforms.</li>
+        <li><strong>File Management</strong> – Create clear folder structures (e.g., "1stSem/Programming") and back up important files regularly.</li>
+      </ul>
+      <div class="tip">Remember: What you share online can remain visible for years—think before you post.</div>
+    </section>
 
+    <!-- Suggested Practice Activities -->
+    <section data-aos="fade-up" data-aos-delay="300">
+      <h2>4. Practice Activities</h2>
+      <ol>
+        <li>Join your class's Google Classroom and post an introduction on the Stream.</li>
+        <li>Create a Google Drive folder structure for all your subjects and share a screenshot with your instructor.</li>
+        <li>Draft a one-page research summary in Google Docs and use the <em>Comments</em> feature with a classmate for feedback.</li>
+        <li>Schedule a mock video meeting in Google Meet and invite a friend using Calendar.</li>
+      </ol>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+      </div>
+      <div class="footer-links">
+        <a href="#">About Us</a>
+        <a href="#">Contact</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+      <div class="copyright">
+        &copy; 2025 TechLink Digital Literacy Program – Baliwag Polytechnic College
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    // Initialize AOS
+    AOS.init();
+
+    // Theme Toggle
+    const themeToggle = document.getElementById("themeToggle");
+    const mobileThemeToggle = document.getElementById("mobileThemeToggle");
+    const body = document.body;
+
+    function toggleTheme() {
+      body.classList.toggle("dark-mode");
+      // Update icon based on theme
+      const icon = themeToggle.querySelector('i');
+      const mobileIcon = mobileThemeToggle.querySelector('i');
+      
+      if (body.classList.contains("dark-mode")) {
+        icon.className = "fas fa-sun";
+        mobileIcon.className = "fas fa-sun";
+      } else {
+        icon.className = "fas fa-moon";
+        mobileIcon.className = "fas fa-moon";
+      }
+    }
+
+    themeToggle.addEventListener("click", toggleTheme);
+    mobileThemeToggle.addEventListener("click", toggleTheme);
+
+    // Mobile Menu
+    const hamburger = document.querySelector(".hamburger");
+    const mobileMenu = document.querySelector(".mobile-menu");
+
+    hamburger.addEventListener("click", () => {
+      mobileMenu.classList.toggle("active");
+      // Animate hamburger to X
+      hamburger.classList.toggle("active");
+    });
+  </script>
 </body>
 </html>
