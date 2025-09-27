@@ -89,6 +89,8 @@ nav {
     flex-direction: column;
     cursor: pointer;
     margin-left: 1rem;
+    z-index: 1001;
+    position: relative;
 }
 
 .hamburger div {
@@ -99,6 +101,18 @@ nav {
     transition: all 0.3s ease;
 }
 
+.hamburger.active div:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.active div:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active div:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+}
+
 .theme-toggle {
     background: none;
     border: none;
@@ -106,6 +120,26 @@ nav {
     font-size: 1.5rem;
     cursor: pointer;
     margin-left: 1rem;
+}
+
+.close-menu {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.8rem;
+    cursor: pointer;
+    padding: 5px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background 0.3s ease;
+}
+
+.close-menu:hover {
+    background: rgba(255, 255, 255, 0.1);
 }
 
 /* Mobile Menu */
