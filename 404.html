@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Not Found - TechLink</title>
+  <link rel="stylesheet" href="lessons/ztyles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    /* 404 Page Specific Styles */
+    :root {
+      --error-color: #e74c3c;
+      --error-light: #ff6b6b;
+    }
+
+    /* 404 Main Section */
+    .error-section {
+      min-height: calc(100vh - 200px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e3f0fc 100%);
+    }
+
+    .dark-mode .error-section {
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    }
+
+    .error-container {
+      text-align: center;
+      max-width: 600px;
+      width: 100%;
+      padding: 3rem 2rem;
+      background: var(--card-bg);
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(6, 87, 146, 0.15);
+      border: 2px solid rgba(73, 182, 252, 0.1);
+    }
+
+    /* Error Code */
+    .error-code {
+      font-size: 8rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--error-color), var(--error-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+      line-height: 1;
+    }
+
+    /* Error Title */
+    .error-title {
+      font-size: 2.5rem;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .dark-mode .error-title {
+      color: var(--secondary-color);
+    }
+
+    /* Error Message */
+    .error-message {
+      font-size: 1.2rem;
+      color: var(--text-color);
+      opacity: 0.9;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    /* Animation Container */
+    .error-animation {
+      position: relative;
+      height: 150px;
+      margin: 2rem auto;
+      width: 200px;
+    }
+
+    /* Tech Gear Animation */
+    .tech-gear {
+      position: absolute;
+      font-size: 4rem;
+      color: var(--primary-color);
+      opacity: 0.7;
+    }
+
+    .gear-1 {
+      top: 20px;
+      left: 30px;
+      animation: spin 10s linear infinite;
+    }
+
+    .gear-2 {
+      top: 60px;
+      right: 30px;
+      animation: spin 8s linear infinite reverse;
+    }
+
+    .gear-3 {
+      bottom: 20px;
+      left: 70px;
+      animation: spin 12s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Broken Link Icon */
+    .broken-link {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 3rem;
+      color: var(--error-color);
+      animation: shake 2s ease-in-out infinite;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
+      25% { transform: translate(-50%, -50%) rotate(-5deg); }
+      75% { transform: translate(-50%, -50%) rotate(5deg); }
+    }
+
+    /* Action Buttons */
+    .error-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .home-btn, .back-btn {
+      padding: 1rem 2rem;
+      border-radius: 25px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border: none;
+      text-decoration: none;
+    }
+
+    .home-btn {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      box-shadow: 0 4px 15px rgba(6, 87, 146, 0.3);
+    }
+
+    .home-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(6, 87, 146, 0.4);
+    }
+
+    .back-btn {
+      background: var(--card-bg);
+      color: var(--text-color);
+      border: 2px solid var(--secondary-color);
+    }
+
+    .back-btn:hover {
+      background: var(--secondary-color);
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    /* Search Box */
+    .search-box {
+      margin-top: 2rem;
+      position: relative;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 1rem 1rem 1rem 3rem;
+      border-radius: 25px;
+      border: 2px solid var(--secondary-color);
+      background: var(--bg-color);
+      color: var(--text-color);
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .search-box input:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(6, 87, 146, 0.2);
+    }
+
+    .search-box i {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--secondary-color);
+    }
+
+    /* Quick Links */
+    .quick-links {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(73, 182, 252, 0.2);
+    }
+
+    .quick-links h3 {
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+    }
+
+    .dark-mode .quick-links h3 {
+      color: var(--secondary-color);
+    }
+
+    .link-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    .link-item {
+      background: var(--bg-color);
+      padding: 0.8rem 1rem;
+      border-radius: 10px;
+      text-decoration: none;
+      color: var(--text-color);
+      transition: all 0.3s ease;
+      border: 1px solid transparent;
+      text-align: center;
+      font-weight: 500;
+    }
+
+    .link-item:hover {
+      background: var(--secondary-color);
+      color: white;
+      transform: translateY(-2px);
+      border-color: var(--primary-color);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .error-code {
+        font-size: 6rem;
+      }
+      
+      .error-title {
+        font-size: 2rem;
+      }
+      
+      .error-actions {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .home-btn, .back-btn {
+        width: 100%;
+        max-width: 250px;
+        justify-content: center;
+      }
+      
+      .error-animation {
+        transform: scale(0.8);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .error-container {
+        padding: 2rem 1rem;
+      }
+      
+      .error-code {
+        font-size: 5rem;
+      }
+      
+      .error-title {
+        font-size: 1.5rem;
+      }
+      
+      .link-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Dark Mode Adjustments */
+    .dark-mode .error-container {
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .dark-mode .search-box input {
+      background: #2d2d2d;
+    }
+
+    .dark-mode .link-item {
+      background: #2d2d2d;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav>
+    <div class="logo" data-aos="fade-right" data-aos-duration="800">
+      <img src="https://i.ibb.co/F45Rntd3/file-00000000edfc61fa892d60997c7437bd.png" alt="TechLink Logo" class="logo-img">
+      TechLink
+    </div>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="https://techlink-ssp.vercel.app" data-aos="fade-down" data-aos-delay="100">Home</a></li>
+        <li><a href="lessons.html" data-aos="fade-down" data-aos-delay="200">Lessons</a></li>
+        <li><a href="games.html" data-aos="fade-down" data-aos-delay="300">Games</a></li>
+      </ul>
+      <button class="theme-toggle" id="themeToggle" data-aos="fade-down" data-aos-delay="500">
+        <i class="fas fa-moon"></i>
+      </button>
+      <div class="hamburger" data-aos="fade-down" data-aos-delay="500">
+        <div></div><div></div><div></div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu">
+    <div class="mobile-menu-header">
+      <img src="https://i.ibb.co/F45Rntd3/file-00000000edfc61fa892d60997c7437bd.png" alt="TechLink Logo" class="mobile-logo">
+      <h3>TechLink</h3>
+      <button class="close-menu" id="closeMenu">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <ul class="mobile-nav-links">
+      <li><a href="https://techlink-ssp.vercel.app">Home</a></li>
+      <li><a href="lessons.html">Lessons</a></li>
+      <li><a href="games.html">Games</a></li>
+    </ul>
+    <button class="mobile-theme-toggle" id="mobileThemeToggle">
+      <i class="fas fa-moon"></i> Toggle Theme
+    </button>
+  </div>
+
+  <!-- 404 Error Section -->
+  <section class="error-section">
+    <div class="error-container" data-aos="fade-up" data-aos-duration="1000">
+      <!-- Animated Tech Gear Graphics -->
+      <div class="error-animation">
+        <div class="tech-gear gear-1">
+          <i class="fas fa-cog"></i>
+        </div>
+        <div class="tech-gear gear-2">
+          <i class="fas fa-cog"></i>
+        </div>
+        <div class="tech-gear gear-3">
+          <i class="fas fa-cog"></i>
+        </div>
+        <div class="broken-link">
+          <i class="fas fa-unlink"></i>
+        </div>
+      </div>
+
+      <!-- Error Code -->
+      <div class="error-code">404</div>
+      
+      <!-- Error Title -->
+      <h1 class="error-title">Page Not Found</h1>
+      
+      <!-- Error Message -->
+      <p class="error-message">
+        Oops! It looks like the page you're searching for has been disconnected 
+        or doesn't exist in our network. The digital trail seems to have gone cold.
+      </p>
+
+      <!-- Search Box -->
+      <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Search TechLink for lessons, games, or topics..." id="searchInput">
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="error-actions">
+        <a href="https://techlink-ssp.vercel.app" class="home-btn">
+          <i class="fas fa-home"></i> Back to Homepage
+        </a>
+        <button onclick="window.history.back()" class="back-btn">
+          <i class="fas fa-arrow-left"></i> Go Back
+        </button>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="quick-links">
+        <h3>Quick Navigation</h3>
+        <div class="link-grid">
+          <a href="lessons.html" class="link-item">
+            <i class="fas fa-book"></i> Lessons
+          </a>
+          <a href="games.html" class="link-item">
+            <i class="fas fa-gamepad"></i> Games
+          </a>
+          <a href="#" class="link-item">
+            <i class="fas fa-info-circle"></i> About
+          </a>
+          <a href="#" class="link-item">
+            <i class="fas fa-envelope"></i> Contact
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+      <div class="footer-links">
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+      <p class="copyright">&copy; 2024 TechLink. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="zcript.js"></script>
+  <script>
+    // Additional 404 page specific JavaScript
+    document.addEventListener('DOMContentLoaded', function() {
+      // Search functionality
+      const searchInput = document.getElementById('searchInput');
+      
+      if (searchInput) {
+        searchInput.addEventListener('keypress', function(e) {
+          if (e.key === 'Enter') {
+            const query = this.value.trim();
+            if (query) {
+              // In a real implementation, this would search your site
+              alert('Search functionality would look for: ' + query);
+              // Example redirect to search page:
+              // window.location.href = '/search?q=' + encodeURIComponent(query);
+            }
+          }
+        });
+      }
+
+      // Add some fun hover effects to error code
+      const errorCode = document.querySelector('.error-code');
+      if (errorCode) {
+        errorCode.addEventListener('mouseenter', function() {
+          this.style.animation = 'none';
+          setTimeout(() => {
+            this.style.animation = '';
+          }, 10);
+        });
+      }
+
+      // Add click effect to broken link icon
+      const brokenLink = document.querySelector('.broken-link');
+      if (brokenLink) {
+        brokenLink.addEventListener('click', function() {
+          this.style.transform = 'translate(-50%, -50%) scale(1.2)';
+          setTimeout(() => {
+            this.style.transform = 'translate(-50%, -50%) scale(1)';
+          }, 300);
+          
+          // Create sparkle effect
+          for (let i = 0; i < 5; i++) {
+            setTimeout(() => {
+              const sparkle = document.createElement('div');
+              sparkle.innerHTML = '<i class="fas fa-asterisk" style="color: var(--secondary-color); font-size: 0.8rem;"></i>';
+              sparkle.style.position = 'absolute';
+              sparkle.style.left = '50%';
+              sparkle.style.top = '50%';
+              sparkle.style.transform = 'translate(-50%, -50%)';
+              sparkle.style.opacity = '0';
+              sparkle.style.animation = `sparkle 1s ease-out ${i * 0.1}s`;
+              
+              const errorAnimation = document.querySelector('.error-animation');
+              if (errorAnimation) {
+                errorAnimation.appendChild(sparkle);
+                
+                // Remove sparkle after animation
+                setTimeout(() => {
+                  if (sparkle.parentNode) {
+                    sparkle.parentNode.removeChild(sparkle);
+                  }
+                }, 1000);
+              }
+            }, i * 100);
+          }
+        });
+      }
+
+      // Add CSS for sparkle animation
+      const style = document.createElement('style');
+      style.textContent = `
+        @keyframes sparkle {
+          0% {
+            transform: translate(-50%, -50%) scale(0) rotate(0deg);
+            opacity: 1;
+          }
+          100% {
+            transform: translate(
+              calc(-50% + ${Math.random() * 100 - 50}px), 
+              calc(-50% + ${Math.random() * 100 - 50}px)
+            ) scale(1) rotate(360deg);
+            opacity: 0;
+          }
+        }
+      `;
+      document.head.appendChild(style);
+    });
+  </script>
+</body>
+</html>
